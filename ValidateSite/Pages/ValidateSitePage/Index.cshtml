@@ -1,0 +1,285 @@
+﻿@page
+@model ValidateSite.Pages.ValidateSitePage.IndexModel
+@{
+    ViewData["Title"] = "Check Valid Sites Here"; 
+}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    @*<style>
+        .loading-box {
+  position: relative;
+  width: 400px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid #ededed;
+  overflow: hidden;
+  margin-top: 50px;
+}
+.loader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50px;
+  background: green/*linear-gradient(30deg, #9dff97, #00b21b)*/;
+  left: 0%;
+}
+.loader {
+  left: -100%;
+  animation: load 3s linear infinite;
+}
+ @@keyframes load {
+  100% {
+    left: 100%;
+  }
+  0% {
+    left: -100%;
+  }
+  }
+    </style>*@
+</head>
+<body>
+
+    <section class="headline">
+        <h1>Welcome to Validate me..🔎</h1>
+        <p>Available Site Identification and Validation!</p>
+        <form method="post">
+            <div class="searchbox">
+
+                <input asp-for="@Model.test1" value="" name="url" class="form-control" id="checkUrl" />
+                <button type="submit" onclick="checkUrl()" class="button-29" role="button">Check Me</button>
+
+
+
+            </div>
+
+        </form>
+        @*<div class="loading-box">
+            <div class="loader">
+            </div>
+        </div>*@
+
+
+        <div id="msg" style="margin-top : 15px;margin-left:50px;margin-right:50px;margin-botton:15px">@Model.test1</div>
+
+        <button class="button-28 more" id="findMore">Find more</button>
+        <div class="popup-window">
+            <div class="popup">
+                <div class="popup-close">
+                    ❌
+                </div>
+               
+                <img  class="siteImg" src="http://127.0.0.1:8887/selenium-screenshot.png" />
+
+                <p class="info">@Model.title</p>
+                    </div>
+        </div>
+        @if (ViewData["Message"] != null)
+        {
+    <script type="text/javascript">
+
+
+        window.addEventListener("load", event => {
+            var image = document.querySelector('.siteImg');
+            var isLoaded = image.complete && image.naturalHeight !== 0;
+            /*  alert(isLoaded);*/
+            while (isLoaded == false) {
+                document.getElementById("load").setAttribute("class", "loader");
+            }
+        });
+        const btnMore = document.querySelector(".button-28");
+        const btn = document.querySelector('button');
+                        window.onload=function()
+                        {
+                            var alerttype="";
+                            var sitetype='@ViewData["Message"]'
+                            if(sitetype==="Valid Url")
+                            {
+                                alerttype = "alert-success";
+                            }
+                            else if(sitetype==="Suspicious Url")
+                            {
+                                alerttype = "alert-danger";
+                                document.getElementById("findMore").style.visibility = "hidden";
+                            }
+                            else if(sitetype==="Spam")
+                            {
+                                alerttype = "alert-warning"
+                                document.getElementById("findMore").style.visibility = "hidden";
+                            }
+                            else{
+                                alerttype = "alert-info"
+                                document.getElementById("findMore").style.visibility = "hidden";
+                            }
+
+                            document.getElementById("msg").setAttribute("class","alert "+alerttype);
+                        }
+
+        const pop = document.querySelector('.popup-window');
+        const popup = document.querySelector('.popup');
+        const close = document.querySelector('.popup-close');
+
+        if (document.getElementById("msg").innerText == "") {
+            btnMore.style.display = 'none';
+        }
+        btnMore.addEventListener('click', () => {
+            pop.style.display = 'block';
+            btnMore.style.display = 'none';
+            btn.style.display = 'none';
+        })
+        pop.addEventListener('click', () => {
+            pop.style.display = 'none';
+            btn.style.display = 'block';
+            document.getElementById("msg").innerText = "";
+        })
+        close.addEventListener('click', () => {
+            pop.style.display = 'none';
+            btn.style.display = 'block';
+            document.getElementById("msg").innerText = "";
+        })
+
+    </script>
+}
+
+    </section>
+    <section class="features" id="services">
+        <div class="feature-container">
+            <img src="https://i.ytimg.com/vi/iZP2jNz1c1w/maxresdefault.jpg"
+                 alt="Flexbox Feature" />
+            <h2>Easily find broken and malicious links</h2>
+            <p>
+                Non-working links are annoying and reflect poorly on your
+                professionalism. They not only deter visitors from staying on and
+                returning to your site, but they can also negatively impact your
+                search engine rankings. Even worse than a broken link is a link to a
+                website that causes harm through malware or phishing.
+            </p>
+            <p>
+                Instead of manually checking all the pages of your site and clicking
+                through all the outgoing links, let Dr. Link Check do the work and
+                give you a report of the links that need your attention.
+            </p>
+        </div>
+        <div class="feature-container">
+            <img src="https://www.drlinkcheck.com/assets/images/links-in-html-code.png"
+                 alt="Flexbox Feature" />
+            <h2>A single click to check them all</h2>
+            <p>
+                Beginning with a start URL, our bot crawls through the HTML and CSS
+                code of your entire website and examines all the links it can find.
+            </p>
+            <p>
+                This includes internal page links and outbound links to other
+                websites, as well as links to images, style sheets, and other
+                resource files.
+            </p>
+        </div>
+        <div class="feature-container">
+            <img src="https://howto.caspio.com/wp-content/uploads/2021/04/creating_query_strings1.png"
+                 alt="Flexbox Feature" />
+            <h2>Multiple checks per link</h2>
+            <p>
+                Each link found by Dr. Link Check passes through multiple checks to
+                make sure you’re actually linking to the intended content.
+            </p>
+            <ul>
+                <li>
+                    <strong>Broken link check:</strong> Is the URL properly formatted?
+                    Does the server respond in a reasonable amount of time? Is the SSL
+                    certificate valid? Does the return code indicate an error (such as
+                    404 for a missing page or 500 for a server error)?
+                </li>
+                <li>
+                    <strong>Blacklist check:</strong> Does the link appear on any
+                    blacklists for hosting malicious content?
+                </li>
+                <li><strong>Soft error check:</strong> Is the server responding with a 200 OK success code, but the content of the page indicates that there is something wrong with this link?</li>
+            </ul>
+        </div>
+    </section>
+
+
+
+    <!-- modal -->
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+   
+   
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<form method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Put your url to check</label>
+        <input asp-for="@Model.test1" type="url" value=""  name="url" class="form-control" id="checkurl" placeholder="Enter URL" />
+        <span id="alert-message">@Model.test1</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>*@
+
+<script text = "text/javascript">
+    var alertmsg = document.getElementById("alert-message");
+    const btn = document.querySelector("button");
+    btn.addEventListener('click',(e)=>{
+        //checkUrl
+        //e.preventDefault();
+        //console.log("Meassage");
+        //console.log(@Model.test1);
+        //console.log("@Model.test1");
+        
+        if ("@Model.test1" === "Valid url") {
+            alert("Valid url");
+            alertmsg.style.color = "green";
+            //alertmsg.innerText = "Valid site.";
+            //console.log("@Model.test1" + " Valid site");
+            //e.preventDefault();
+        }
+        else if ("@Model.test1" == "Suspicious Url")
+        {
+            //alertmsg.style.visibility = "visible";
+            alertmsg.style.color = "red";
+            //alertmsg.innerText = "Valid site.";
+            //console.log("@Model.test1" + " Valid site");
+            //e.preventDefault();
+        }
+    })
+    function checkUrl(){
+
+        console.log("@Model.test1");
+        if ("@Model.test1" == "Valid url") {
+                //alertmsg.style.visibility = "visible";
+                alertmsg.style.color = "green";
+                //alertmsg.innerText = "Valid site.";
+                console.log("@Model.test1"+" Valid site");
+            }
+            else
+            {
+               // alertmsg.style.visibility = "visible";
+                alertmsg.style.color = "red";
+                //alertmsg.innerText = "Not a Valid site.";
+                console.log("@Model.test1"+"  Not Valid site");
+            }
+        }
+        
+    
+</script>
